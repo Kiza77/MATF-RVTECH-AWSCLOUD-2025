@@ -1,6 +1,6 @@
 services:
   localstack:
-    container_name: rvtech-matf-2025-localstack-charges
+    container_name: rvtech-matf-2025-localstack-chargers
     image: localstack/localstack
     ports:
       - "127.0.0.1:4566:4566" # LocalStack Gateway
