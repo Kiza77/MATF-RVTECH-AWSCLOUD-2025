@@ -17,7 +17,7 @@ provider:
 
 functions:                          		# Sekcija koja definiše Lambda funkcije
   syncOCMdata:                      		# Naziv funkcije (logički ID)
-    handler: index.handler          		# Fajl.nazivFunkcije (index.js exports.handler)
+    handler: index.syncOCMdata          # Fajl.nazivFunkcije (index.js exports.syncOCMdata)
     description: Sync data from Open Charge Map
     role: SyncOCMDataRole           		# Referenca na IAM rolu definisanu u resources
     events:                         		# Okidači za ovu funkciju
@@ -27,6 +27,15 @@ functions:                          		# Sekcija koja definiše Lambda funkcije
       - http:                       		# API Gateway HTTP endpoint
           path: sync                		# Putanja: /sync
           method: get               		# HTTP metoda: GET
+
+  getChargersByTown:
+    handler: index.getChargersByTown
+    description: Get chargers by town from database
+    role: SyncOCMDataRole               # Ista rola posto za localstack ne treba, ali bi trebala nova za aws
+    events:
+      - http:
+          path: chargers/{town}         # Putanja {town} se cita u kodu
+          method: get
 
 resources:                          		# CloudFormation resursi sekcija
   Resources:                        		# AWS resursi za kreiranje
