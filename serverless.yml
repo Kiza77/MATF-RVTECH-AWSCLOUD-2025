@@ -36,6 +36,7 @@ functions:                          		# Sekcija koja definiše Lambda funkcije
       - http:
           path: chargers/{town}         # Putanja {town} se cita u kodu
           method: get
+          cors: true
 
 resources:                          		# CloudFormation resursi sekcija
   Resources:                        		# AWS resursi za kreiranje
