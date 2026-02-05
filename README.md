@@ -13,57 +13,83 @@ Potrebni alati:
 
 1. Proveriti ima li postojeceg kontejnera:
 
-`docker-compose ps`
+```
+docker-compose ps
+```
 
 ---
 2. * Zaustavi postojece kontejnere ako postoje:
 
-`docker-compose down -v`              
+```
+docker-compose down -v
+```           
 
 Ako ne radi moze samo docker compose
 
 ---
 3. * Pokreni LocalStack:
 
-`docker-compose up -d`
+```
+docker-compose up -d
+```
+
 
 ---
 4. Instaliraj serverless dependencies
 
-`npm install`
+```
+npm install
+```
+
 
 ---
 5. * Deploy serverless na localstack:
 
-`npx serverless deploy`
+```
+npx serverless deploy
+```
 
 ---
 6. Zipuj lambda funkcije i ubaci u kontejner:
 
-`zip function.zip index.js`
+```
+zip function.zip index.js
+```
 
-`docker cp function.zip rvtech-matf-2025-localstack-chargers:/function.zip`
+```
+docker cp function.zip rvtech-matf-2025-localstack-chargers:/function.zip
+```
 
 ---
 7. Prekopiraj izgled sajta u kontejner:
 
-`docker cp web rvtech-matf-2025-localstack-chargers:/web`
+```
+docker cp web rvtech-matf-2025-localstack-chargers:/web
+```
 
 ---
 8. **Dalji koraci se rade iz  kontejnera sa localstackom / preko awscli-local**
 
 Za kontejner sa localstackom:
-`docker exec -it rvtech-matf-2025-localstack-chargers bash`
+```
+docker exec -it rvtech-matf-2025-localstack-chargers bash
+```
 
 Za awscli-local:
 Napraviti venv ako ne postoji
-`python -m venv rivianvenv`
+```
+python -m venv rivianvenv
+```
 
 Instalirati awscli-local:
-`pip install awscli-local`
+```
+pip install awscli-local
+```
 
 Aktivirati venv
-`source ./rivianvenv/bin/activate`
+```
+source ./rivianvenv/bin/activate
+```
 
 
 ---
@@ -95,17 +121,23 @@ Aktivirati venv
 ---
 10. Napravi s3 bucket:
 
-`awslocal s3 mb s3://chargers-website`
+```
+awslocal s3 mb s3://chargers-website
+```
 
 ---
 11. Sync s3 bucket:
 
-`awslocal s3 sync /web s3://chargers-website`
+```
+awslocal s3 sync /web s3://chargers-website
+```
 
 ---
 12. * Pronalazak api_id i azuriranje u index.html:
 
-`awslocal apigateway get-rest-apis --query 'items[0].id'`
+```
+awslocal apigateway get-rest-apis --query 'items[0].id'
+```
 
 """
 140        // KONFIGURACIJA - promeni API_ID ako treba
@@ -117,7 +149,9 @@ Aktivirati venv
 ---
 13. * Deploy frontend na S3:
 
-`npm run deploy-frontend-fixed-bucket`
+```
+npm run deploy-frontend-fixed-bucket
+```
 
 Sajt se nalazi na jednoj od ove dve adrese, u zavisnosti od mesta pokretanjai:
 - http://chargers-website.s3-website.localhost.localstack.cloud:4566/
